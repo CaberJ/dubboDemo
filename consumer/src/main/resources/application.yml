@@ -1,0 +1,19 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: dubboConsumer
+dubbo:
+  registry:
+    address: zookeeper://114.132.198.119:2181
+    simplified: true
+  metadata-report:
+    address: zookeeper://114.132.198.119:2181
+  protocol:
+    name: dubbo
+    port: -1
+  scan:
+    base-packages: cn.caber.consumer.dubbo
+  consumer:
+    timeout: 1000
+    retries: 0
