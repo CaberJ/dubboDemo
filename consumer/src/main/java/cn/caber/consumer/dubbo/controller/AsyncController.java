@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
@@ -29,7 +30,11 @@ public class AsyncController {
     public Caber asyncInvoke(@RequestParam String name) throws ExecutionException, InterruptedException {
         CompletableFuture<Caber> caberCompletableFuture = asyncService.asyncInvoke(name);
         System.out.println("任务已提交");
-        return caberCompletableFuture.get();
+        return caberCompletableFuture.whenComplete((v, t) -> {
+            if (Objects.nonNull(t)) {
+                t.printStackTrace();
+            }
+        }).get();
     }
 
     @GetMapping("/asyncInvokeByRpcContext")
@@ -38,5 +43,16 @@ public class AsyncController {
         return caber;
     }
 
+    @GetMapping("/asyncConsume")
+    public Caber asyncConsume(@RequestParam String name) throws ExecutionException, InterruptedException {
+        CompletableFuture<Caber> future = CompletableFuture.supplyAsync(() -> {
+            return asyncService.invoke(name);
+        });
+        return future.whenComplete((v, t) -> {
+            if (Objects.nonNull(t)) {
+                t.printStackTrace();
+            }
+        }).get();
+    }
 
 }

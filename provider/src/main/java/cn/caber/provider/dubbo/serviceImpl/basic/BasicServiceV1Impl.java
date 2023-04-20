@@ -7,7 +7,7 @@ import org.apache.dubbo.config.annotation.DubboService;
 @DubboService(interfaceClass = BasicService.class,version = "V1.0",group = "normal")
 public class BasicServiceV1Impl implements BasicService {
     @Override
-    public Caber getObject(Caber caber) {
+    public Caber invoke(Caber caber) {
         caber.setAge(12);
         caber.setName("v1");
         return caber;

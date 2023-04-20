@@ -14,5 +14,4 @@ dubbo:
     port: -1
   scan:
     base-packages: cn.caber.provider.dubbo
-  provider:
-    timeout: 1000
+

@@ -37,7 +37,7 @@ public class AsyncServiceImpl implements AsyncService {
         System.out.println("主线程" + Thread.currentThread().getName());
         return CompletableFuture.supplyAsync(() -> {
             try {
-                long time = ThreadLocalRandom.current().nextLong(10000);
+                long time = ThreadLocalRandom.current().nextLong(1000);
                 Thread.sleep(time);
                 System.out.println("业务线程" + Thread.currentThread().getName() + ",延时：" + time);
                 //  此处延时时长超过consumer timeout 后，会报错超时

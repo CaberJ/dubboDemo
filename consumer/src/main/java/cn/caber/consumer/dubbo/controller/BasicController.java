@@ -16,7 +16,7 @@ public class BasicController {
 
     @GetMapping("/getObjectV1")
     public Caber getObjectV1() {
-        return basicServiceV1.getObject(Caber.builder().build());
+        return basicServiceV1.invoke(Caber.builder().build());
     }
 
     @DubboReference(version = "V2.0", group = "normal")
@@ -24,6 +24,6 @@ public class BasicController {
 
     @GetMapping("/getObjectV2")
     public Caber getObjectV2() {
-        return basicServiceV2.getObject(Caber.builder().build());
+        return basicServiceV2.invoke(Caber.builder().build());
     }
 }

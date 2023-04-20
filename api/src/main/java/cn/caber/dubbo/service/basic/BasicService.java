@@ -4,5 +4,5 @@ import cn.caber.dubbo.po.Caber;
 
 public interface BasicService {
 
-    Caber getObject(Caber caber);
+    Caber invoke(Caber caber);
 }
