@@ -1,8 +1,8 @@
 server:
-  port: 8081
+  port: 8080
 spring:
   application:
-    name: dubboProvider
+    name: dubboSubProvider
 dubbo:
   registry:
     address: zookeeper://114.132.198.119:2181
@@ -13,7 +13,5 @@ dubbo:
     name: dubbo
     port: -1
   scan:
-    base-packages: cn.caber.provider.dubbo
-  consumer:
-    timeout: 1000
-    retries: 0
+    base-packages: cn.caber.subprovider.dubbo
+

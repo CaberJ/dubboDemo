@@ -20,11 +20,11 @@ public class RpcContextController {
 
     @GetMapping("/invoke")
     public Caber invoke(@RequestParam String name) {
-        if (RpcContext.getContext().isConsumerSide()) {
-            RpcContext.getContext().setAttachment("name", name);
-            RpcContext.getContext().setAttachment("age", 34);
-        }
+        RpcContext.getContext().setAttachment("name", name);
+        RpcContext.getContext().setAttachment("age", 34);
         Caber caber = rpcContextService.invoke(null);
+        RpcContext context = RpcContext.getContext();
+        System.out.println(context.toString());
         return caber;
     }
 }

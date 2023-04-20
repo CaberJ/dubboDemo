@@ -3,6 +3,7 @@ package cn.caber.consumer.dubbo.controller;
 import cn.caber.dubbo.po.Caber;
 import cn.caber.dubbo.service.async.AsyncService;
 import org.apache.dubbo.config.annotation.DubboReference;
+import org.apache.dubbo.rpc.RpcContext;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,9 +39,26 @@ public class AsyncController {
     }
 
     @GetMapping("/asyncInvokeByRpcContext")
-    public Caber asyncInvokeByRpcContext(@RequestParam String name) {
+    public Caber asyncInvokeByRpcContext(@RequestParam String name) throws ExecutionException, InterruptedException {
         Caber caber = asyncService.asyncInvokeByRpcContext(name);
-        return caber;
+        System.out.println(caber);
+        //拿到调用的Future引用，当结果返回后，会被通知和设置到此Future
+        CompletableFuture<Object> completableFuture = RpcContext.getServerContext().getCompletableFuture();
+        return (Caber) completableFuture.whenComplete((result, exception) -> {
+            if (exception == null) {
+                // 执行业务
+            } else {
+                exception.printStackTrace();
+            }
+        }).get();
+
+        // 如果是函数式接口，则可使用下面这种方式；此处如果传入一个callable 接口服务，则可得到一个CompletableFuture<Object> 返回
+       /* CompletableFuture<Object> completableFuture = RpcContext.getServerContext().asyncCall(
+                () -> {
+            asyncService.asyncInvokeByRpcContext(name);
+        });
+        completableFuture.get();
+        */
     }
 
     @GetMapping("/asyncConsume")

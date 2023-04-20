@@ -12,6 +12,11 @@ import java.util.concurrent.ThreadLocalRandom;
 @DubboService(interfaceClass = AsyncService.class)
 public class AsyncServiceImpl implements AsyncService {
 
+    /**
+     * 没有异步
+     * @param name
+     * @return
+     */
     @Override
     public Caber invoke(String name) {
         try {
@@ -28,6 +33,7 @@ public class AsyncServiceImpl implements AsyncService {
 
     /**
      * 方式一： 使用CompletableFuture 来达成异步效果
+     *  只需要服务提供者异步即可，消费者直接从CompletableFuture 获取结果
      *
      * @param name
      * @return
@@ -49,6 +55,13 @@ public class AsyncServiceImpl implements AsyncService {
         });
     }
 
+    /**
+     * 方式二：
+     *
+     *
+     * @param name
+     * @return
+     */
     @Override
         public Caber asyncInvokeByRpcContext(String name) {
         System.out.println("主线程" + Thread.currentThread().getName());
@@ -57,7 +70,7 @@ public class AsyncServiceImpl implements AsyncService {
             // 如果要使用上下文，则必须要放在第一句执行
             asyncContext.signalContextSwitch();
             Caber caber = Caber.builder().age(12).name(name).build();
-            long time = ThreadLocalRandom.current().nextLong(2000);
+            long time = ThreadLocalRandom.current().nextLong(10000);
             try {
                 Thread.sleep(time);
             } catch (InterruptedException e) {
