@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * 基本能力（版本&分组）测试
+ */
 @RestController
 @RequestMapping("/basic")
 public class BasicController {

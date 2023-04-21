@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
+/**
+ * 泛化调用测试
+ */
 @RestController
 @RequestMapping("/generic")
 public class GenericInvokerApiController {

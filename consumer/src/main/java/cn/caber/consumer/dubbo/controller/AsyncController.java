@@ -13,6 +13,9 @@ import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * 异步调用测试
+ */
 @RestController
 @RequestMapping("/async")
 public class AsyncController {

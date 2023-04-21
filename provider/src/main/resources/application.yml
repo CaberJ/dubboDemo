@@ -17,3 +17,4 @@ dubbo:
   consumer:
     timeout: 1000
     retries: 0
+    check: false

@@ -1,0 +1,19 @@
+1. 异步
+2. 分组
+3. 版本
+4. 回调
+5. 上下文
+6. 回声测试
+7. 过滤器
+    - Filter
+    - ExceptionFilter
+    - GenericFilter
+    - (实践)数据传递
+    - (实践)traceId 传递，日志打印
+8. 泛化调用
+9. 参数校验
+    - 自带参数校验
+    - (实践)Filter & Validation 自定义参数校验
+10. 分布式事务
+    - Seata
+    - (实践)
